@@ -1,0 +1,30 @@
+    <div class="container table-container">
+      <table class="table table-striped mt-4">
+        <thead>
+          <tr>
+            <th>ID #</th>
+            <th>Name</th>
+            <th>Course</th>
+            <th>Class</th>
+            <th>Contact No.</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (std of studentList; track $index){
+          <tr key={1}>
+            <td>{{std.Id}}</td>
+            <td>{{std.Name}}</td>
+            <td>{{std.Courses}}</td>
+            <td>{{std.Class}}</td>
+            <td>{{std.ContactNumber}}</td>
+            <td>
+              <button class="btn btn-sm btn-success"  [routerLink]="['/edit-student', std.Id]" routerLinkActive="router-link-active" >✔️ Edit</button>
+              <button class="btn btn-sm btn-danger mr-2" (click)="deleteStudent(std.Id)">❌ Delete</button>
+            </td>
+          </tr>
+        }
+        </tbody>
+      </table>
+    </div>
+    <router-outlet></router-outlet>

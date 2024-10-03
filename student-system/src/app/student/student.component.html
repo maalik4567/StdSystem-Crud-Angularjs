@@ -1,0 +1,86 @@
+<div class="container d-flex justify-content-center formapp">
+  <form id="studentForm" (ngSubmit)="onSubmit()">
+    <div class="form-row mb-4">
+      <div class="label-width">
+        <label for="Name" class="col-form-label">Name:</label>
+      </div>
+      <div class="col-md-8">
+        <input
+          type="text"
+          id="Name"
+          [(ngModel)]="student.Name"
+          name="Name"
+          class="form-control form-control-sm"
+          placeholder="Enter Student Name"
+          required
+        />
+        <p *ngIf="!nameValid" class="text-danger">Student Name is required.</p>
+      </div>
+    </div>
+
+    <div class="form-row mb-4">
+      <div class="label-width">
+        <label for="availableCourses" class="col-form-label">Course:</label>
+      </div>
+      <div class="col-md-8 course-controls">
+        <select id="availableCourses" class="form-control form-control-sm" (change)="addCourse($any($event.target).value)">
+          <option value="">Select Course</option>
+          <option *ngFor="let course of availableCourses" [ngValue]="course.Value">{{ course.Text }}</option>
+        </select>
+        <p *ngIf="!coursesValid" class="text-danger">At least one course must be selected.</p>
+      </div>
+    </div>
+
+    <div class="form-row mb-4">
+      <div class="col-md-12 course-box">
+        <label class="col-form-label"><b>Selected Courses:</b></label>
+        <div id="selectedCourses">
+          <span *ngFor="let courseValue of selectedCourses">
+            {{courseValue}}
+            <button type="button" class="btn btn-danger btn-sm" (click)="removeCourse(courseValue)">
+              <i>x</i>
+            </button>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-row mb-4">
+      <div class="label-width">
+        <label for="Class" class="col-form-label">Class:</label>
+      </div>
+      <div class="col-md-8">
+        <select id="Class" [(ngModel)]="student.Class" name="Class" class="form-control form-control-sm" required>
+          <option value="">Select Class</option>
+          <option *ngFor="let classVal of availableClasses" [ngValue]="classVal.Value">{{ classVal.Text }}</option>
+        </select>
+        <p *ngIf="!classValid" class="text-danger">Class is required.</p>
+      </div>
+    </div>
+
+    <div class="form-row mb-4">
+      <div class="label-width">
+        <label for="ContactNumber" class="col-form-label">Contact Number:</label>
+      </div>
+      <div class="col-md-8">
+        <input
+          type="tel"
+          id="ContactNumber"
+          [(ngModel)]="student.ContactNumber"
+          name="ContactNumber"
+          class="form-control form-control-sm"
+          placeholder="Enter Contact Number"
+          required
+        />
+        <p *ngIf="!contactValid" class="text-danger">Contact Number is required.</p>
+      </div>
+    </div>
+
+    <div class="form-row mb-4">
+      <div class="label-width"></div>
+      <div class="col-md-8">
+        <button type="submit" class="btn btn-primary btn-sm submit-btn">Submit</button>
+      </div>
+    </div>
+  </form>
+</div>
